@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>23BCE1760 q2</title>
+</head>
+<body>
+<canvas id="pondScene" width="600" height="400"></canvas>
+<script>
+const canvas = document.getElementById("pondScene");
+const ctx = canvas.getContext("2d");
+function drawPond() {
+ctx.fillStyle = "lightblue";
+ctx.beginPath();
+ctx.ellipse(300, 250, 100, 50, 0, 0, Math.PI * 2);
+ctx.fill();
+ctx.stroke();
+}
+function drawBoat(x) {
+ctx.fillStyle = "brown";
+ctx.beginPath();
+ctx.moveTo(x, 240);
+ctx.lineTo(x + 40, 240);
+ctx.lineTo(x + 30, 250);
+ctx.lineTo(x + 10, 250);
+ctx.closePath();
+ctx.fill();
+}
+function drawSun() {
+ctx.fillStyle = "yellow";
+ctx.beginPath();
+ctx.arc(500, 50, 30, 0, Math.PI * 2);
+ctx.fill();
+for (let i = 0; i < 12; i++) {
+let angle = (Math.PI / 6) * i;
+let x1 = 500 + Math.cos(angle) * 35;
+let y1 = 50 + Math.sin(angle) * 35;
+let x2 = 500 + Math.cos(angle) * 50;
+let y2 = 50 + Math.sin(angle) * 50;
+ctx.beginPath();
+ctx.moveTo(x1, y1);
+ctx.lineTo(x2, y2);
+ctx.stroke();
+}
+}
+function drawHouse() {
+ctx.fillStyle = "orange";
+ctx.fillRect(100, 200, 100, 100);
+ctx.fillStyle = "red";
+ctx.beginPath();
+ctx.moveTo(100, 200);
+ctx.lineTo(150, 150);
+ctx.lineTo(200, 200);
+ctx.closePath();
+ctx.fill();
+ctx.fillStyle = "brown";
+ctx.fillRect(140, 250, 20, 50);
+ctx.fillStyle = "blue";
+ctx.fillRect(110, 220, 20, 20);
+ctx.fillRect(170, 220, 20, 20);
+}
+function drawFlower() {
+// Petals
+ctx.fillStyle = "pink";
+for (let i = 0; i < 5; i++) {
+let angle = (Math.PI / 2.5) * i;
+let x = 400 + Math.cos(angle) * 20;
+let y = 190 + Math.sin(angle) * 20;
+ctx.beginPath();
+ctx.ellipse(x, y, 12, 18, 0, 0, Math.PI * 2);
+ctx.fill();
+}
+// Center
+ctx.fillStyle = "yellow";
+ctx.beginPath();
+ctx.arc(400, 200, 10, 0, Math.PI * 2);
+ctx.fill();
+// Stem
+ctx.fillStyle = "green";
+ctx.fillRect(398, 230, 4, 30);
+}
+function drawDuck() {
+ctx.fillStyle = "yellow";
+ctx.beginPath();
+ctx.arc(350, 270, 15, 0, Math.PI * 2);
+ctx.fill();
+ctx.beginPath();
+ctx.arc(335, 280, 10, 0, Math.PI * 2);
+ctx.fill();
+}
+function drawStones() {
+ctx.fillStyle = "gray";
+ctx.beginPath();
+ctx.arc(250, 330, 10, 0, Math.PI * 2);
+ctx.arc(265, 335, 8, 0, Math.PI * 2);
+ctx.arc(280, 325, 12, 0, Math.PI * 2);
+ctx.fill();
+}
+let boatX = 280;
+function animateBoat() {
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+drawScene();
+drawBoat(boatX);
+boatX += 1;
+if (boatX > 320) boatX = 280;
+requestAnimationFrame(animateBoat);
+}
+function drawScene() {
+drawPond();
+drawSun();
+drawHouse();
+drawFlower();
+drawDuck();
+drawStones();
+}
+drawScene();
+animateBoat();
+</script>
+</body>
+</html>
